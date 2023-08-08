@@ -4,7 +4,7 @@ const sequelize = require('../sequelize');
 const Cliente = require('../model/Cliente');
 
 Cliente.sync();
-
+//novo
 
 //GET Retorna tarefas com paginação e ordenação
 router.get('/Cliente', async (req, res) => {
