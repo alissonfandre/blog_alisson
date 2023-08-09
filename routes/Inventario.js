@@ -48,7 +48,7 @@ router.get('/Inventario/:id', async (req, res) => {
 
 //POST Cria uma tarefa
 router.post('/Inventario', async (req, res) => {
-    sequelize.query(`INSERT INTO inventarios (carroId,quantidade createdAt, updatedAt) VALUES (?, ?, ?, ?,)`,
+    sequelize.query(`INSERT INTO inventarios (carroId,quantidade, createdAt, updatedAt) VALUES (?, ?, ?, ?)`,
         { replacements: [req.body.carroId,
             req.body.quantidade,
              new Date(), new Date()] }
@@ -68,9 +68,8 @@ router.post('/Inventario', async (req, res) => {
 
 //PUT Atualiza uma tarefa pelo ID
 router.put('/Inventario/:id', async (req, res) => {
-    sequelize.query(`UPDATE inventarios SET description = ? WHERE id = ?`,
-        { replacements: [req.body.carroId,
-            req.body.quantidade,
+    sequelize.query(`UPDATE inventarios SET quantidade= ? WHERE id = ?`,
+        { replacements: [req.body.quantidade,
              req.params.id] }
     )
     .then(([results, metadata]) => {

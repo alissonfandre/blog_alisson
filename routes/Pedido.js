@@ -47,7 +47,7 @@ router.get('/Pedido/:id', async (req, res) => {
 
 //POST Cria uma tarefa
 router.post('/Pedido', async (req, res) => {
-    sequelize.query(`INSERT INTO edidos (clienteid,carroid,dataPedido,statusPedido, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?,)`,
+    sequelize.query(`INSERT INTO pedidos (clienteid,carroid,dataPedido,statusPedido, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?)`,
         { replacements: [req.body.clienteid,
             req.body.carroid,
             req.body.dataPedido,
@@ -68,11 +68,8 @@ router.post('/Pedido', async (req, res) => {
 
 //PUT Atualiza uma tarefa pelo ID
 router.put('/Pedido/:id', async (req, res) => {
-    sequelize.query(`UPDATE pedidos SET description = ? WHERE id = ?`,
-        { replacements: [req.body.clienteid,
-            req.body.carroid,
-            req.body.dataPedido,
-            req.body.statusPedido, 
+    sequelize.query(`UPDATE pedidos SET statusPedido = ? WHERE id = ?`,
+        { replacements: [  req.body.statusPedido, 
              req.params.id] }
     )
     .then(([results, metadata]) => {

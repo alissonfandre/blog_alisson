@@ -67,10 +67,8 @@ router.post('/Carro', async (req, res) => {
 
 //PUT Atualiza uma tarefa pelo ID
 router.put('/Carro/:id', async (req, res) => {
-    sequelize.query(`UPDATE carros SET description = ? WHERE id = ?`,
+    sequelize.query(`UPDATE carros SET modelo = ? WHERE id = ?`,
         { replacements: [req.body.modelo,
-            req.body.preco,
-            req.body.caracteristicas,
              req.params.id] }
     )
     .then(([results, metadata]) => {
