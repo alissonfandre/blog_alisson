@@ -46,7 +46,7 @@ router.get('/:id', async (req, res) => {
     });
 });
 
-//POST Cria uma tarefa
+//POST Cria um post
 router.post('/', async (req, res) => {
     sequelize.query(`INSERT INTO posts (titulo,conteudo,autor_id, createdAt, updatedAt) VALUES (?, ?, ?, ? ,?)`,
         { replacements: [req.body.titulo,
