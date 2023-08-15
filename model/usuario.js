@@ -1,17 +1,16 @@
 const db = require ("../sequelize");
 const sequelize = require ("sequelize");
 
-const Carro = db.define('Carro', {
+const usuario = db.define('usuario', {
   id: {
     type: sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  modelo: sequelize.STRING,
-  preco: sequelize.FLOAT,
-  caracteristicas: sequelize.TEXT
+  nome: sequelize.STRING,
+  email: sequelize.STRING,
 });
 
-Carro.sync();
+usuario.sync();
 
-module.exports = Carro;
+module.exports = usuario;

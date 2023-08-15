@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../sequelize');
-const Cliente = require('../model/Cliente');
+const usuario = require('../model/usuario');
 
-Cliente.sync();
-//novo
+usuario.sync();
+
 
 //GET Retorna tarefas com paginação e ordenação
-router.get('/Cliente', async (req, res) => {
+router.get('/', async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
-    sequelize.query(`SELECT * FROM clientes ORDER BY updatedAt DESC LIMIT ? OFFSET ?`,
+    sequelize.query(`SELECT * FROM usuarios ORDER BY updatedAt DESC LIMIT ? OFFSET ?`,
         { replacements: [parseInt(limit), (page - 1) * parseInt(limit)] }
     )
     .then(([results, metadata]) => {
@@ -23,8 +23,8 @@ router.get('/Cliente', async (req, res) => {
 });
 
 //GET Consulta uma tarefa pelo ID
-router.get('/Cliente/:id', async (req, res) => {
-    sequelize.query(`SELECT * FROM clientes WHERE id = Cliente`, { replacements: [req.params.id] })
+router.get('/:id', async (req, res) => {
+    sequelize.query(`SELECT * FROM usuarios WHERE id = usuario`, { replacements: [req.params.id] })
     .then(([results, metadata]) => {
         if (results.length === 0) {
             res.status(404).json({
@@ -46,12 +46,10 @@ router.get('/Cliente/:id', async (req, res) => {
 });
 
 //POST Cria uma tarefa
-router.post('/Cliente', async (req, res) => {
-    sequelize.query(`INSERT INTO clientes (nome,email,telefone,endereco, createdAt, updatedAt) VALUES (?, ?, ?,?, ?, ?)`,
+router.post('/', async (req, res) => {
+    sequelize.query(`INSERT INTO usuarios (nome, email,  createdAt, updatedAt) VALUES (?, ?, ?, ?)`,
         { replacements: [req.body.nome,
-            req.body.email,
-            req.body.telefone,  
-            req.body.endereco , new Date(), new Date()] }
+            req.body.email, new Date(), new Date()] }
     )
     .then(([results, metadata]) => {
         res.status(201).json({
@@ -67,8 +65,8 @@ router.post('/Cliente', async (req, res) => {
 });
 
 //PUT Atualiza uma tarefa pelo ID
-router.put('/Cliente/:id', async (req, res) => {
-    sequelize.query(`UPDATE clientes SET nome= ? WHERE id = ?`,
+router.put('/:id', async (req, res) => {
+    sequelize.query(`UPDATE usuarios SET nome = ? WHERE id = ?`,
         { replacements: [req.body.nome,
              req.params.id] }
     )
@@ -93,8 +91,8 @@ router.put('/Cliente/:id', async (req, res) => {
 });
 
 //DELETE Deleta uma tarefa pelo ID
-router.delete('/Cliente/:id', async (req, res) => {
-    sequelize.query(`DELETE FROM clientes WHERE id = ?`, { replacements: [req.params.id] })
+router.delete('/:id', async (req, res) => {
+    sequelize.query(`DELETE FROM usuarios WHERE id = ?`, { replacements: [req.params.id] })
     .then(([results, metadata]) => {
         if (metadata.affectedRows === 0) {
             res.status(404).json({
@@ -116,4 +114,3 @@ router.delete('/Cliente/:id', async (req, res) => {
 });
 
 module.exports = router;
-

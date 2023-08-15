@@ -3,10 +3,6 @@ const router = express.Router();
 //const Task = require('./model/Task');
 const sequelize = require('./sequelize');
 const carro = require('./model/Carro');
-const cliente = require('./model/Cliente');
-const Inventario = require('./model/Inventario');
-const Pedido = require('./model/Pedido');
-
 
 sequelize.sync();
 

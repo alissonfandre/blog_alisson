@@ -3,19 +3,16 @@ const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 //const routes = require("./routes");
-const Carro = require ("./routes/carro");
-const Cliente = require ("./routes/cliente");
-const Inventario = require ("./routes/Inventario");
-const Pedido = require ("./routes/Pedido");
+const usuario = require ("./routes/usuario");
+const post = require ("./routes/post");
 const PORT =  8081;
 
 app.use(cors());
 app.use(bodyParser.json());
 //app.use(routes);
-app.use('/Carro',Carro);
-app.use('/Cliente',Cliente);
-app.use('/Inventario',Inventario);
-app.use('/Pedido',Pedido);
+app.use('/usuario',usuario);
+app.use('/post',post);
+
 
 
 app.listen(PORT, () => {
