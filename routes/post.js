@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     });
 });
 
-//GET Consulta uma tarefa pelo ID
+//GET Consulta uma tarefa pelo ID //novo
 router.get('/:id', async (req, res) => {
     sequelize.query(`SELECT * FROM posts WHERE id = post`, { replacements: [req.params.id] })
     .then(([results, metadata]) => {
